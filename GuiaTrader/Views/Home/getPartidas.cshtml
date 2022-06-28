@@ -1,0 +1,104 @@
+﻿@model GuiaTrader.Models.PartidaModelView
+
+<div class="row" style="margin-top: 20px; text-align: center">
+    <h3>Partidas do dia @Model.dataReferencia.ToString("dd/MM/yyyy")</h3>
+</div>
+
+<div class="row d-flex flex-row-reverse" style="margin-top: 15px;">
+    <div class="col-lg-4">
+
+        <div class='input-group' id='data' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+            <h6 style="margin-top:auto; margin-right: 5px;">Data Referência </h6>
+            <input id='dataInput' type='text' class='form-control'  data-td-target='#data' data-td-toggle='datetimepicker' />
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Horário da Partida</th>
+                <th>Campeonato</th>
+                <th>Partida</th>
+                <th>Prev de Gols</th>
+                <th>Prob Over 2,5</th>
+                <th>Odd Mínima</th>
+                <th>Resultado Entrada</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GuiaTrader.Models.Partida partida in Model.listaPartidas.OrderBy(x => x.horarioPartida))
+            {
+                <tr>
+                    <td>@partida.horarioPartida.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@partida.campeonato</td>
+                    <td>@partida.casa.nome x @partida.visitante.nome</td>
+                    <td>@partida.previsaoGols</td>
+                    <td>@partida.probabilidadeOver25 %</td>
+                    <td>@(Math.Round(100/((partida.casa.percentOver25 + partida.visitante.percentOver25)/2), 2))</td>
+                    @if (partida.entradaFeita)
+                    {
+                        <td>
+                            <div class="btn-group col-lg-12">
+                                <button data-id="@partida.id" class="btnGreen btn btn-success col-lg-6"><i class="fa-solid fa-check"></i></button>
+                                <button data-id="@partida.id" class="btnRed btn btn-danger col-lg-6"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="btn-group col-lg-12">
+                                <button data-id="@partida.id" class="btnEntrada btn btn-secondary col-lg-6">Entrada Feita</button>
+                            </div>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        const dtMes = document.getElementById('data');
+        const dtMesTempus = new tempusDominus.TempusDominus(dtMes, {
+            localization: { locale: 'pt-br' },
+            restrictions: {
+                maxDate: moment().format("YYYY-MM-") + moment().daysInMonth()
+            },
+            display: {
+                components: {
+                    clock: false,
+                    date: true,
+                    useTwentyfourHour: true,
+                }
+            },
+        });
+
+
+        dtMesTempus.dates.formatInput = date => moment(date).format('DD/MM/YYYY')
+        dtMesTempus.dates.setValue(new tempusDominus.DateTime('@Model.dataReferencia.AddDays(1).ToString("yyyy-MM-dd")'));
+
+        dtMes.addEventListener(tempusDominus.Namespace.events.change, (e) => {
+            $.ajax({
+                url: "@Url.Action("getPartidas", "Home")",
+                data: { dataReferencia: moment(e.detail.date).format('YYYY-MM-DD') },
+                success: function (result) {
+                    $("#conteudo").empty();
+                    $("#btnPartidas").removeClass('btn-secondary');
+                    $("#btnResumo").addClass('btn-secondary');
+                    $("#btnResumo").removeClass('btn-primary');
+                    $("#btnPartidas").addClass('btn-primary');
+                    $("#conteudo").html(result);
+                    $("#btnPartidas").blur();
+
+                    ativarBotoes();
+                }
+            });
+        });
+    });
+</script>

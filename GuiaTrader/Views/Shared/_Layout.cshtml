@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GuiaTrader</title>
+    <link rel="stylesheet" href="~/css/font-awesome/all.css" />
+    <link rel="stylesheet" href="~/css/tempus-dominus.css" />
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GuiaTrader.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div style="margin:0px 10px 0px 10px">
+
+        @RenderBody()
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - GuiaTrader
+        </div>
+    </footer>
+
+    <script src="~/js/font-awesome/all.js"></script>
+    <script src="~/js/jquery-3.6.0.js"></script>
+    <script src="~/js/jquery.inputmask.js"></script>
+    <script src="~/js/moment-with-locales.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/tempus-dominus.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script src="~/js/bootstrap/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
