@@ -7,6 +7,9 @@ env:
         PROJECT: GuiaTrader
 
 phases:   
+    install:
+        commands:
+          - /usr/local/bin/dotnet-install.sh --channel LTS
     pre_build:
         commands:
             - echo Restore started on `date`
