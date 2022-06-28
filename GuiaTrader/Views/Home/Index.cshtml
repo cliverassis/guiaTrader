@@ -152,7 +152,7 @@
                     $.ajax({
                         url: "@Url.Action("salvarResultado", "Home")",
                         type: "POST",
-                        data: { idPartida: idPartida, green: true, valor: $("#valorLucro").inputmask('unmaskedvalue') },
+                        data: { idPartida: idPartida, green: true, valor: $("#valorLucro").inputmask('unmaskedvalue').replace(",",".") },
                         success: function (result) {
                             if (result == true) {
                                 idPartida = 0;
