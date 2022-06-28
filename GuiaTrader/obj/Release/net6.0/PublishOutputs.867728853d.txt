@@ -1,0 +1,14 @@
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/GuiaTrader
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/appsettings.Development.json
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/appsettings.json
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/GuiaTrader.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/GuiaTrader.deps.json
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/GuiaTrader.runtimeconfig.json
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/GuiaTrader.pdb
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/HtmlAgilityPack.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Microsoft.EntityFrameworkCore.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Microsoft.Extensions.Caching.Memory.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Npgsql.dll
+/Users/cliver/Projects/GuiaTrader/GuiaTrader/bin/Release/net6.0/publish/Npgsql.EntityFrameworkCore.PostgreSQL.dll
