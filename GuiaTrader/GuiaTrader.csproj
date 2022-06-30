@@ -21,6 +21,9 @@
     <None Remove="jQuery.InputMask" />
     <None Remove="popper.js" />
     <None Remove="System.Security.Cryptography.Algorithms" />
+    <None Remove="Imagens\ambas.jpeg" />
+    <None Remove="Imagens\result.jpeg" />
+    <None Remove="Imagens\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
@@ -43,6 +46,7 @@
     <Folder Include="wwwroot\css\bootstrap\" />
     <Folder Include="wwwroot\js\bootstrap\" />
     <Folder Include="wwwroot\Imagens\" />
+    <Folder Include="Imagens\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\font-awesome\" />
@@ -54,5 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\Imagens\bg_login.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagens\ambas.jpeg" />
+    <Content Include="Imagens\result.jpeg" />
   </ItemGroup>
 </Project>
