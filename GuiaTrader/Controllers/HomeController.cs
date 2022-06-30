@@ -17,7 +17,31 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        return View();
+        if (Facade.Fachada.getInstance().getUsuarioAtual() != null)
+            return View("InicioGuiaTrader", Facade.Fachada.getInstance().getUsuarioAtual());
+        else
+            return View();
+    }
+
+    [HttpGet]
+    public IActionResult Logout()
+    {
+        Facade.Fachada.getInstance().Logout();
+
+        return RedirectToAction("Index");
+    }
+
+
+    [HttpGet]
+    public ViewResult InicioGuiaTrader(Usuario user)
+    {
+        if (user.id > 0)
+            return View();
+
+        if (Facade.Fachada.getInstance().verifyUser(user.usuario, user.senha))
+            return View();
+        else
+            return View("Index");
     }
 
     [HttpGet]

@@ -1,212 +1,67 @@
-﻿
+﻿@model KeyValuePair<String, String>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AjaxTagHelper
+
 @{
     ViewData["Title"] = "Guia Trader";
 }
 
-<div class="row" style="margin-top:15px; padding: 0px 10px;">
-    <nav class="nav nav-pills flex-column flex-sm-row btn-group">
-        <button id="btnResumo" class="btn btn-primary flex-sm-fill text-sm-center text-white ">Resumo do mês</button>
-        <button id="btnPartidas" class="btn btn-secondary flex-sm-fill text-sm-center text-white ">Partidas do dia</button>
-    </nav>
-</div>
 
-<div id="conteudo" class="row">
+<div class="d-flex justify-content-center vh-100" style="background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center; background-image: url('@Url.Content("~/Imagens/bg_login.jpeg")');">
+    <div style="position:absolute; left: 31%; top: 25%; width: 40%;">
+        <div class="container">
+            <div class="card card-container" style="backdrop-filter: blur(20px); background-color: transparent; border: none;">
+                <img id="profile-img" style="width: 96px; height: 96px; margin: 10px auto 10px; display: block; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                <p id="profile-name" class="profile-name-card"></p>
+                <div class="row" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input id="user" type="text" id="inputUser" class="form-control" placeholder="Nome do usuário" required autofocus>
+                    <input id="pwd" type="password" id="inputPassword" class="form-control" placeholder="Senha" required style="margin-top: 5px;">
+                    <button id="btnEntrar" class="btn btn-primary btn-block btn-signin" style="margin-top: 10px; width:100%; text-align: center;" type="submit">Entrar</button>
+                </div>
 
-</div>
-
-<div class="modal fade" id="modalGreen" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Green</h5>
-            </div>
-            <div class="modal-body">
-                <input id="valorLucro" type="text" class="form form-control" placeholder="Inserir valor do lucro" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btnClose btn btn-secondary" data-dismiss="#modalGreen">Cancelar</button>
-                <button id="btnSalvarGreen" type="button" class="btn btn-success">Salvar Green</button>
-            </div>
-        </div>
+            </div><!-- /card-container -->
+        </div><!-- /container -->
     </div>
 </div>
 
-<div class="modal fade" id="modalRed" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deseja salvar o Red?</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btnClose btn btn-secondary" data-dismiss="#modalRed">Cancelar</button>
-                <button id="btnSalvarRed" type="button" class="btn btn-danger">Salvar Red</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="modalEntrada" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deseja informar entrada?</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btnClose btn btn-secondary" data-dismiss="#modalRed">Cancelar</button>
-                <button id="btnSalvarEntrada" type="button" class="btn btn-primary">Salvar Entrada</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-@section Scripts{
-    <script type="text/javascript">
-        var idPartida = 0;
-        $(document).ready(function () {
-            $("#valorLucro").inputmask('decimal', {
-                'alias': 'numeric',
-                'groupSeparator': '.',
-                'autoGroup': true,
-                'digits': 2,
-                'radixPoint': ",",
-                'digitsOptional': true,
-                'allowMinus': false,
-                'prefix': 'R$ ',
-                'placeholder': '',
-                'removeMaskOnSubmit': true
-            });
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
 
-            $("#btnResumo").on('click', function () {
-                $.ajax({
-                    url: "@Url.Action("getResumoMes", "Home")",
-                    data: { dataReferencia: moment().format('YYYY-MM-DD') },
-                    success: function (result) {
-                        $("#conteudo").empty();
-                        $("#btnResumo").removeClass('btn-secondary');
-                        $("#btnPartidas").addClass('btn-secondary');
-                        $("#btnPartidas").removeClass('btn-primary');
-                        $("#btnResumo").addClass('btn-primary');
-                        $("#conteudo").html(result);
-                        $("#btnResumo").blur();
+                $("#pwd").on('keypress', function (e) {
+                    if (e.which == 13) {
+                        $('#btnEntrar').click();
                     }
                 });
-            });
 
-            $("#btnPartidas").on('click', function () {
-                $.ajax({
-                    url: "@Url.Action("getPartidas", "Home")",
-                    data: { dataReferencia: moment().format('YYYY-MM-DD') },
-                    success: function (result) {
-                        $("#conteudo").empty();
+                $('#btnEntrar').on('click', function () {
+                    $("#pwd").prop('disabled', true);
+                    $("#user").prop('disabled', true);
+                    $("#btnEntrar").prop('disabled', true);
 
-                        $("#btnPartidas").removeClass('btn-secondary');
-                        $("#btnResumo").addClass('btn-secondary');
-                        $("#btnResumo").removeClass('btn-primary');
-                        $("#btnPartidas").addClass('btn-primary');
-                        $("#conteudo").html(result);
-                        $("#btnPartidas").blur();
-
-                        ativarBotoes();
-                    }
-                });
-            });
-
-            $("#btnResumo").click();
-        });
-
-        function ativarBotoes() {
-            $(".btnGreen").off("click");
-            $(".btnGreen").on("click", function () {
-                $(this).blur();
-                idPartida = $(this).attr('data-id');
-                $("#modalGreen").modal('show');
-            });
-
-            $(".btnRed").off("click");
-            $(".btnRed").on("click", function () {
-                $(this).blur();
-                idPartida = $(this).attr('data-id');
-                $("#modalRed").modal('show');
-            });
-
-            $(".btnEntrada").off("click");
-            $(".btnEntrada").on("click", function () {
-                $(this).blur();
-                idPartida = $(this).attr('data-id');
-                $("#modalEntrada").modal('show');
-            });
-
-            $(".btnClose").off("click");
-            $(".btnClose").on("click", function () {
-                $("#modalGreen").modal('hide');
-                $("#modalRed").modal('hide');
-                $("#modalEntrada").modal('hide');
-                idPartida = 0;
-            });
-
-            $("#btnSalvarGreen").off("click");
-            $("#btnSalvarGreen").on("click", function () {
-                if ($("#valorLucro").inputmask('unmaskedvalue').length == 0)
-                    alert("Inserir valor do lucro!");
-                else {
-                    $.ajax({
-                        url: "@Url.Action("salvarResultado", "Home")",
-                        type: "POST",
-                        data: { idPartida: idPartida, green: true, valor: $("#valorLucro").inputmask('unmaskedvalue').replace(",",".") },
-                        success: function (result) {
-                            if (result == true) {
-                                idPartida = 0;
-                                alert("Green salvo!");
-                                $("#modalGreen").modal('hide');
+                    if ($("#user").val().length == 0)
+                        alert("Inserir usuário!");
+                    else if ($("#pwd").val().length == 0)
+                        alert("Inserir senha!");
+                    else {
+                        $.ajax({
+                            url: "@Url.Action("InicioGuiaTrader", "Home")",
+                            data: { usuario: $("#user").val(), senha: $("#pwd").val() },
+                            success: function (result) {
+                                $("#divInicio").empty();
+                                $("#divInicio").html(result);
+                                $("#pwd").prop('disabled', false);
+                                $("#user").prop('disabled', false);
+                                $("#btnEntrar").prop('disabled', false);
                             }
-                            else {
-                                alert("Erro ao salvar Green!");
-                            }
-                        }
-                    });
-                }
-            });
-
-            $("#btnSalvarRed").off("click");
-            $("#btnSalvarRed").on("click", function () {
-
-                $.ajax({
-                    url: "@Url.Action("salvarResultado", "Home")",
-                    type: "POST",
-                    data: { idPartida: idPartida, green: false, valor: -10 },
-                    success: function (result) {
-                        if (result == true) {
-                            idPartida = 0;
-                            alert("Red salvo!");
-                            $("#modalRed").modal('hide');
-                        }
-                        else {
-                            alert("Erro ao salvar Red!");
-                        }
+                        });
                     }
+
                 });
             });
-
-            $("#btnSalvarEntrada").off("click");
-            $("#btnSalvarEntrada").on("click", function () {
-                $.ajax({
-                    url: "@Url.Action("salvarEntrada", "Home")",
-                    type: "POST",
-                    data: { idPartida: idPartida },
-                    success: function (result) {
-                        if (result == true) {
-                            idPartida = 0;
-                            alert("Entrada salva!");
-                            $("#modalEntrada").modal('hide');
-                            $("#btnPartidas").click();
-
-                        }
-                        else {
-                            alert("Erro ao salvar Entrada!");
-                        }
-                    }
-                });
-            });
-        }
-    </script>
-}
+        </script>
+    }

@@ -1,6 +1,8 @@
 ﻿using System;
 using GuiaTrader.DAO;
 using GuiaTrader.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace GuiaTrader.Business
 {
@@ -59,6 +61,25 @@ namespace GuiaTrader.Business
         public Boolean salvarEntrada(Int64 idPartida)
         {
             return this.guiaTraderDAO.salvarEntrada(idPartida);
+        }
+
+        public Usuario verifyUser(String usuario, String senha)
+        {
+            StringBuilder builder = new StringBuilder();
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(senha));
+
+                // Convert byte array to a string   
+                
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+            }
+
+            return this.guiaTraderDAO.verifyUser(usuario, builder.ToString());
         }
     }
 }

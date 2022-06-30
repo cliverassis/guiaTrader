@@ -30,19 +30,22 @@
         <tbody>
             @foreach (GuiaTrader.Models.Partida partida in Model.listaPartidas.OrderBy(x => x.horarioPartida))
             {
-                <tr>
-                    <td>@partida.horarioPartida.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@partida.campeonato</td>
-                    <td>@partida.casa.nome x @partida.visitante.nome</td>
-                    <td>@partida.previsaoGols</td>
-                    <td>@partida.probabilidadeOver25 %</td>
-                    <td>@(Math.Round(100/((partida.casa.percentOver25 + partida.visitante.percentOver25)/2), 2))</td>
-                    @if (partida.entradaFeita)
+            <tr>
+                <td>@partida.horarioPartida.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@partida.campeonato</td>
+                <td>@partida.casa.nome x @partida.visitante.nome</td>
+                <td>@partida.previsaoGols</td>
+                <td>@partida.probabilidadeOver25 %</td>
+                <td>@(Math.Round(100/((partida.casa.percentOver25 + partida.visitante.percentOver25)/2), 2))</td>
+                @if (GuiaTrader.Facade.Fachada.getInstance().getUsuarioAtual().perfil == Usuario.PRIVILAEGIO.ADMIN)
+                {
+                    if (partida.entradaFeita)
                     {
                         <td>
                             <div class="btn-group col-lg-12">
                                 <button data-id="@partida.id" class="btnGreen btn btn-success col-lg-6"><i class="fa-solid fa-check"></i></button>
                                 <button data-id="@partida.id" class="btnRed btn btn-danger col-lg-6"><i class="fa-solid fa-xmark"></i></button>
+
                             </div>
                         </td>
                     }
@@ -50,12 +53,32 @@
                     {
                         <td>
                             <div class="btn-group col-lg-12">
-                                <button data-id="@partida.id" class="btnEntrada btn btn-secondary col-lg-6">Entrada Feita</button>
+                                <button data-id="@partida.id" class="btnEntrada btn btn-secondary col-lg-6">Fazer Entrada</button>
                             </div>
                         </td>
                     }
+                }
+                else
+                {
+                    if (partida.entradaFeita)
+                    {
+                        <td>
+                            <div class="btn-group col-lg-12">
+                                <button class="btn btn-primary col-lg-6"><i class="fa-solid fa-check"></i> Entrada Realizada</button>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="btn-group col-lg-12">
+                                <button class="btn btn-secondary col-lg-6">Entrada não Realizada</button>
+                            </div>
+                        </td>
+                    }
+                }
 
-                </tr>
+            </tr>
             }
         </tbody>
     </table>
@@ -68,7 +91,7 @@
         const dtMesTempus = new tempusDominus.TempusDominus(dtMes, {
             localization: { locale: 'pt-br' },
             restrictions: {
-                maxDate: moment().format("YYYY-MM-") + moment().daysInMonth()
+               // maxDate: moment().format("YYYY-MM-") + moment().daysInMonth()
             },
             display: {
                 components: {

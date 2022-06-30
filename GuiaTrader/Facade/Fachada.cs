@@ -8,6 +8,7 @@ namespace GuiaTrader.Facade
 	{
 		private static Fachada? _instance;
 		private GuiaTraderBusiness guiaTraderBus;
+		private Usuario usuario;
 
 		public static Fachada getInstance()
 		{
@@ -31,6 +32,23 @@ namespace GuiaTrader.Facade
 		{
 			return this.guiaTraderBus.GetPartidasBTTS(dataReferencia);
 		}
+
+        public Boolean verifyUser(String user, String pwd)
+        {
+			usuario = this.guiaTraderBus.verifyUser(user, pwd);
+
+			return usuario != null;
+		}
+
+		public Usuario getUsuarioAtual()
+        {
+			return this.usuario;
+        }
+
+		public void Logout()
+        {
+			usuario = null;
+        }
 
         public Boolean salvarResultado(Int64 idPartida, Boolean green, Double valor)
         {

@@ -248,6 +248,47 @@ namespace GuiaTrader.DAO
                     conn.Close();
             }
         }
+
+        public Usuario verifyUser(String user, String pwd)
+        {
+            NpgsqlConnection? conn = null;
+            NpgsqlDataReader? reader = null;
+            try
+            {
+                conn = new NpgsqlConnection(strConnection);
+                conn.Open();
+                String sql = "SELECT * FROM tb_usuario WHERE usuario=@user AND password=@pwd;";
+                NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+                command.Parameters.AddWithValue("user", user);
+                command.Parameters.AddWithValue("pwd", pwd);
+                reader = command.ExecuteReader();
+
+                Usuario? toRtn = null;
+                if (reader.Read())
+                {
+                    toRtn = new Usuario();
+                    toRtn.id = Int64.Parse(reader["id"].ToString());
+                    toRtn.usuario = reader["usuario"].ToString();
+                    toRtn.perfil = (Usuario.PRIVILAEGIO)reader["perfil"];
+                }
+
+                return toRtn;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERRO - " + e.Message);
+
+                return null;
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+
+                if (reader != null)
+                    reader.Close();
+            }
+        }
     }
 }
 

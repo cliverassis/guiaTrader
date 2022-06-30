@@ -9,6 +9,7 @@ namespace GuiaTrader.DAO
 		public List<Partida> GetPartidasBTTS(DateTime dataReferencia);
 		public Boolean salvarResultado(Int64 idPartida, Boolean green, Double valor);
 		public Boolean salvarEntrada(Int64 idPartida);
+		public Usuario verifyUser(String user, String pwd);
 	}
 }
 
