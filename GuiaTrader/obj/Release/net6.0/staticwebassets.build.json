@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0uxNcjNu1m4h6xTw5c3IsnyB7XBAImQZprZOnvlxKlM=",
+  "Hash": "zDNBqxdojinz4ngZ0QcdJSOslyCcgnzDugHFjV0lpiU=",
   "Source": "GuiaTrader",
   "BasePath": "_content/GuiaTrader",
   "Mode": "Default",
@@ -1698,6 +1698,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/cliver/Projects/guiaTrader/GuiaTrader/wwwroot/Imagens/ambas.jpeg",
+      "SourceId": "GuiaTrader",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/cliver/Projects/guiaTrader/GuiaTrader/wwwroot/",
+      "BasePath": "_content/GuiaTrader",
+      "RelativePath": "Imagens/ambas.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Imagens/ambas.jpeg"
+    },
+    {
+      "Identity": "/Users/cliver/Projects/guiaTrader/GuiaTrader/wwwroot/Imagens/result.jpeg",
+      "SourceId": "GuiaTrader",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/cliver/Projects/guiaTrader/GuiaTrader/wwwroot/",
+      "BasePath": "_content/GuiaTrader",
+      "RelativePath": "Imagens/result.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Imagens/result.jpeg"
     },
     {
       "Identity": "/Users/cliver/Projects/guiaTrader/GuiaTrader/wwwroot/js/bootstrap/bootstrap.bundle.js",
