@@ -5,6 +5,35 @@ using System.Net;
 
 namespace GuiaTrader.Controllers;
 
+public class SessionExpireAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            HttpContext ctx = HttpContext.Current;
+            // check  sessions here
+            Boolean isAjax = filterContext.HttpContext.Request.IsAjaxRequest();
+            if (HttpContext.Current.Session.IsNewSession && HttpContext.Current.Session["InstanceKey"] == null)
+            {
+                if (isAjax)
+                #if DEBUG
+                    filterContext.Result = new RedirectResult("/Home/SessionExpired");
+                #else
+                    filterContext.Result = new RedirectResult("/sgee/Home/SessionExpired");
+                #endif
+                else
+                #if DEBUG
+                        filterContext.Result = new RedirectResult("/");
+                #else
+                    filterContext.Result = new RedirectResult("/sgee");
+                #endif
+
+                return;
+            }
+            base.OnActionExecuting(filterContext);
+        }
+    }
+
+[SessionExpire]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -17,8 +46,10 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        if (Facade.Fachada.getInstance().getUsuarioAtual() != null)
+        if (Session["InstanceKey"] != null)
+        {
             return View("InicioGuiaTrader", Facade.Fachada.getInstance().getUsuarioAtual());
+        }
         else
             return View();
     }
