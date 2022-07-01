@@ -26,8 +26,8 @@ namespace GuiaTrader.DAO
                              "INNER JOIN tb_resultado_entrada as resultado ON resultado.id_partida = partida.id " +
                              "WHERE horario_partida BETWEEN @dataInicio AND @dataFim ORDER BY partida.horario_partida;";
                 NpgsqlCommand command = new NpgsqlCommand(sql, conn);
-                command.Parameters.AddWithValue("dataInicio", dataReferencia);
-                command.Parameters.AddWithValue("dataFim", dataReferencia.AddDays(1));
+                command.Parameters.AddWithValue("dataInicio", new DateTime(dataReferencia.Year, dataReferencia.Month, 1));
+                command.Parameters.AddWithValue("dataFim", dataReferencia.AddHours(23).AddMinutes(59).AddSeconds(59));
                 reader = command.ExecuteReader();
 
                 List<ResultadoPartida> toRtn = new List<ResultadoPartida>();
