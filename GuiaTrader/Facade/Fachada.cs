@@ -6,16 +6,28 @@ namespace GuiaTrader.Facade
 {
 	public class Fachada
 	{
+		static object locker = new Object();
 		private static Fachada? _instance;
 		private GuiaTraderBusiness guiaTraderBus;
 		private Usuario usuario;
 
 		public static Fachada getInstance()
 		{
-			if (_instance == null)
-                _instance = new Fachada();
+		    lock (locker)
+		    {
+			var inst = (Fachada)HttpContext.Current.Session["InstanceKey"];
+			if (inst == null)
+			{
+			    inst = (Fachada)HttpContext.Current.Session["InstanceKey"];
+			    if (inst == null)
+			    {
+				inst = new Fachada();
+				HttpContext.Current.Session["InstanceKey"] = inst;
+			    }
+			}
 
-			return _instance;
+			return inst;
+		    }
 		}
 
 		private Fachada()
@@ -24,7 +36,7 @@ namespace GuiaTrader.Facade
 		}
 
 		public List<ResultadoPartida> GetResumoMes(DateTime dataReferencia)
-        {
+        	{
 			return this.guiaTraderBus.GetResumoMes(dataReferencia);
 		}
 
