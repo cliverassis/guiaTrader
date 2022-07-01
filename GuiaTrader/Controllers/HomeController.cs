@@ -4,7 +4,7 @@ using GuiaTrader.Models;
 using System.Net;
 
 namespace GuiaTrader.Controllers;
-
+/*
 public class SessionExpireAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -34,6 +34,7 @@ public class SessionExpireAttribute : ActionFilterAttribute
     }
 
 [SessionExpire]
+*/
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
