@@ -24,6 +24,8 @@
     <None Remove="Imagens\ambas.jpeg" />
     <None Remove="Imagens\result.jpeg" />
     <None Remove="Imagens\" />
+    <None Remove="Microsoft.AspNetCore.Session" />
+    <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
@@ -36,6 +38,8 @@
     <PackageReference Include="jQuery.InputMask" Version="5.0.7" />
     <PackageReference Include="popper.js" Version="1.16.1" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\" />

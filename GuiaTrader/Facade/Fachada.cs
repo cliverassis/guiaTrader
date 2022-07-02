@@ -28,9 +28,12 @@ namespace GuiaTrader.Facade
 
         public Boolean verifyUser(String user, String pwd)
         {
-			usuario = this.guiaTraderBus.verifyUser(user, pwd);
+			Usuario _user = this.guiaTraderBus.verifyUser(user, pwd);
+			usuario.id = _user.id;
+			usuario.perfil = _user.perfil;
+			usuario.usuario = _user.usuario;
 
-			return usuario != null;
+			return usuario.id > 0;
 		}
 
 		public Usuario getUsuarioAtual()
