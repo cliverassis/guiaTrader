@@ -1,46 +1,42 @@
 ﻿<Properties StartupConfiguration="{9326A96D-9A1E-4B3D-B336-761A5ED6718F}|Default">
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.GuiaTrader PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiaTrader/Views/Shared/_Layout.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiaTrader/Views/Home/getResumoMes.cshtml">
     <Files>
-      <File FileName="GuiaTrader/Controllers/HomeController.cs" Line="25" Column="6" />
-      <File FileName="GuiaTrader/Views/Shared/_Layout.cshtml" Line="21" Column="5" />
+      <File FileName="GuiaTrader/Controllers/HomeController.cs" Line="39" Column="20" />
       <File FileName="GuiaTrader/Models/Partida.cs" Line="15" Column="42" />
-      <File FileName="GuiaTrader/DAO/GuiaTraderDAOPgSql.cs" Line="9" Column="95" />
-      <File FileName="GuiaTrader/Views/Home/getPartidas.cshtml" Line="93" Column="63" />
-      <File FileName="GuiaTrader/Facade/Fachada.cs" Line="42" Column="34" />
-      <File FileName="GuiaTrader/Business/GuiaTraderBusiness.cs" Line="62" Column="10" />
-      <File FileName="GuiaTrader/DAO/IGuiaTraderDAO.cs" Line="13" Column="2" />
+      <File FileName="GuiaTrader/DAO/GuiaTraderDAOPgSql.cs" Line="266" Column="1" />
+      <File FileName="GuiaTrader/Views/Home/getPartidas.cshtml" Line="67" Column="63" />
+      <File FileName="GuiaTrader/Facade/Fachada.cs" Line="50" Column="19" />
+      <File FileName="GuiaTrader/Business/GuiaTraderBusiness.cs" Line="72" Column="1" />
+      <File FileName="GuiaTrader/DAO/IGuiaTraderDAO.cs" Line="12" Column="18" />
       <File FileName="GuiaTrader/wwwroot/js/moment-with-locales.js" Line="14782" Column="25" />
       <File FileName="GuiaTrader/wwwroot/js/tempus-dominus.js" Line="1064" Column="9" />
-      <File FileName="GuiaTrader/Views/Home/getResumoMes.cshtml" Line="197" Column="44" />
+      <File FileName="GuiaTrader/Views/Home/getResumoMes.cshtml" Line="247" Column="45" />
       <File FileName="GuiaTrader/Models/ResultadoPartidaViewModel.cs" Line="4" Column="43" />
       <File FileName="GuiaTrader/Models/PartidaModelView.cs" Line="12" Column="10" />
       <File FileName=".vs/GuiaTrader/xs/UserPrefs.xml" Line="9" Column="1" />
-      <File FileName="GuiaTrader/Views/Home/Index.cshtml" Line="8" Column="9" />
-      <File FileName="GuiaTrader/Views/Home/InicioGuiaTrader.cshtml" Line="1" Column="1" />
+      <File FileName="GuiaTrader/Views/Home/Index.cshtml" Line="11" Column="281" />
+      <File FileName="GuiaTrader/Views/Home/InicioGuiaTrader.cshtml" Line="5" Column="1" />
+      <File FileName="GuiaTrader/Views/Shared/_Layout.cshtml" Line="13" Column="33" />
+      <File FileName="GuiaTrader/Models/Usuario.cs" Line="13" Column="28" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="GuiaTrader" expanded="True">
             <Node name="GuiaTrader" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Facade" expanded="True" />
-              <Node name="Models" expanded="True" />
+              <Node name="Business" expanded="True" />
+              <Node name="Imagens" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
+                <Node name="Home" expanded="True">
+                  <Node name="getResumoMes.cshtml" selected="True" />
+                </Node>
               </Node>
               <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
-                <Node name="js" expanded="True" />
+                <Node name="Imagens" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -51,4 +47,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.ItemProperties.GuiaTrader PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

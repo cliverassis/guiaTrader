@@ -13,7 +13,7 @@ namespace GuiaTrader.Models
 		public Double previsaoGols { get; set; }
 		public Double probabilidadeOver25 { get; set; }
 		public Boolean entradaFeita { get; set; }
-
+		public String linkBetfair { get; set; }
 
 		public Partida()
         {

@@ -24,6 +24,7 @@
                 <th>Prev de Gols</th>
                 <th>Prob Over 2,5</th>
                 <th>Odd Mínima</th>
+                <th>Link Betfair</th>
                 <th>Resultado Entrada</th>
             </tr>
         </thead>
@@ -37,7 +38,16 @@
                 <td>@partida.previsaoGols</td>
                 <td>@partida.probabilidadeOver25 %</td>
                 <td>@(Math.Round(100/((partida.casa.percentOver25 + partida.visitante.percentOver25)/2), 2))</td>
-                @if (GuiaTrader.Facade.Fachada.getInstance().getUsuarioAtual().perfil == Usuario.PRIVILAEGIO.ADMIN)
+                @if (partida.linkBetfair == "Link não encontrado!")
+                {
+                    <td>@partida.linkBetfair</td>
+                }
+                else
+                {
+                    <td style="word-wrap: break-word;"><a href="@partida.linkBetfair" target="_blank">@partida.linkBetfair</a></td>
+                }
+
+                @if (Model.usuarioAtual.perfil == Usuario.PRIVILAEGIO.ADMIN)
                 {
                     if (partida.entradaFeita)
                     {

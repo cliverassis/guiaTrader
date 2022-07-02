@@ -5,6 +5,7 @@ namespace GuiaTrader.Models
     {
         public List<Partida> listaPartidas { get; set; }
         public DateTime dataReferencia { get; set; }
+        public Usuario usuarioAtual { get; set; }
 
         public PartidaModelView()
         {

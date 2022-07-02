@@ -4,41 +4,11 @@ using GuiaTrader.Models;
 using System.Net;
 
 namespace GuiaTrader.Controllers;
-/*
-public class SessionExpireAttribute : ActionFilterAttribute
-    {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            HttpContext ctx = HttpContext.Current;
-            // check  sessions here
-            Boolean isAjax = filterContext.HttpContext.Request.IsAjaxRequest();
-            if (HttpContext.Current.Session.IsNewSession && HttpContext.Current.Session["InstanceKey"] == null)
-            {
-                if (isAjax)
-                #if DEBUG
-                    filterContext.Result = new RedirectResult("/Home/SessionExpired");
-                #else
-                    filterContext.Result = new RedirectResult("/sgee/Home/SessionExpired");
-                #endif
-                else
-                #if DEBUG
-                        filterContext.Result = new RedirectResult("/");
-                #else
-                    filterContext.Result = new RedirectResult("/sgee");
-                #endif
 
-                return;
-            }
-            base.OnActionExecuting(filterContext);
-        }
-    }
-
-[SessionExpire]
-*/
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    private Facade.Fachada fachada = new Facade.Fachada();
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -47,9 +17,9 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        if (Session["InstanceKey"] != null)
+        if (fachada.getUsuarioAtual() != null && fachada.getUsuarioAtual().id > 0)
         {
-            return View("InicioGuiaTrader", Facade.Fachada.getInstance().getUsuarioAtual());
+            return View("InicioGuiaTrader", fachada.getUsuarioAtual());
         }
         else
             return View();
@@ -58,7 +28,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Logout()
     {
-        Facade.Fachada.getInstance().Logout();
+        fachada.Logout();
 
         return RedirectToAction("Index");
     }
@@ -70,7 +40,7 @@ public class HomeController : Controller
         if (user.id > 0)
             return View();
 
-        if (Facade.Fachada.getInstance().verifyUser(user.usuario, user.senha))
+        if (fachada.verifyUser(user.usuario, user.senha))
             return View();
         else
             return View("Index");
@@ -81,7 +51,7 @@ public class HomeController : Controller
     {
         ResultadoPartidaViewModel model = new ResultadoPartidaViewModel();
         model.dataReferencia = new DateTime(dataReferencia.Year, dataReferencia.Month, DateTime.DaysInMonth(dataReferencia.Year, dataReferencia.Month));
-        model.listaResultadoPartida = Facade.Fachada.getInstance().GetResumoMes(model.dataReferencia);
+        model.listaResultadoPartida = fachada.GetResumoMes(model.dataReferencia);
 
         return PartialView(model);
     }
@@ -90,8 +60,9 @@ public class HomeController : Controller
     public PartialViewResult getPartidas(DateTime dataReferencia)
     {
         PartidaModelView model = new PartidaModelView();
+        model.usuarioAtual = fachada.getUsuarioAtual();
         model.dataReferencia = dataReferencia;
-        model.listaPartidas = Facade.Fachada.getInstance().GetPartidasBTTS(dataReferencia);
+        model.listaPartidas = fachada.GetPartidasBTTS(dataReferencia);
 
         return PartialView(model);
     }
@@ -99,13 +70,13 @@ public class HomeController : Controller
     [HttpPost]
     public Boolean salvarResultado(Int64 idPartida, Boolean green, Double valor)
     {
-        return Facade.Fachada.getInstance().salvarResultado(idPartida, green, valor);
+        return fachada.salvarResultado(idPartida, green, valor);
     }
 
     [HttpPost]
     public Boolean salvarEntrada(Int64 idPartida)
     {
-        return Facade.Fachada.getInstance().salvarEntrada(idPartida);
+        return fachada.salvarEntrada(idPartida);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

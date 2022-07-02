@@ -111,7 +111,7 @@ namespace GuiaTrader.DAO
             {
                 conn = new NpgsqlConnection(strConnection);
                 conn.Open();
-                String sql = "SELECT partida.campeonato, partida.casa, partida.fora, partida.id, partida.horario_partida, " +
+                String sql = "SELECT partida.campeonato, partida.casa, partida.fora, partida.id, partida.horario_partida, partida.link_betfair, " +
                              "dados.\"mediaGolsMarcado_casa\", dados.\"mediaGolsMarcado_fora\", dados.\"mediaGolsSofrido_casa\", " +
                              "dados.\"mediaGolsSofrido_fora\", dados.\"mediaGolsMarcadosSofridos_casa\", dados.\"mediaGolsMarcadosSofridos_fora\", " +
                              "dados.\"mediaGolsMarcadosSofridosGeral_casa\", dados.\"mediaGolsMarcadosSofridosGeral_fora\",  " +
@@ -139,6 +139,9 @@ namespace GuiaTrader.DAO
 
                     if (reader["entrada_feita"] != DBNull.Value)
                         partida.entradaFeita = Boolean.Parse(reader["entrada_feita"].ToString());
+
+                    if (reader["link_betfair"] != DBNull.Value)
+                        partida.linkBetfair = reader["link_betfair"].ToString();
 
                     Equipe casa = new Equipe();
                     if (reader["casa"] != DBNull.Value)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using GuiaTrader.Business;
 using GuiaTrader.Models;
 
@@ -6,33 +7,13 @@ namespace GuiaTrader.Facade
 {
 	public class Fachada
 	{
-		static object locker = new Object();
-		private static Fachada? _instance;
 		private GuiaTraderBusiness guiaTraderBus;
 		private Usuario usuario;
 
-		public static Fachada getInstance()
-		{
-		    lock (locker)
-		    {
-			var inst = (Fachada)HttpContext.Current.Session["InstanceKey"];
-			if (inst == null)
-			{
-			    inst = (Fachada)HttpContext.Current.Session["InstanceKey"];
-			    if (inst == null)
-			    {
-				inst = new Fachada();
-				HttpContext.Current.Session["InstanceKey"] = inst;
-			    }
-			}
-
-			return inst;
-		    }
-		}
-
-		private Fachada()
+		public Fachada()
 		{
 			this.guiaTraderBus = new GuiaTraderBusiness();
+			this.usuario = new Usuario();
 		}
 
 		public List<ResultadoPartida> GetResumoMes(DateTime dataReferencia)
