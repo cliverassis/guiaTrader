@@ -32,3 +32,8 @@
 /Users/cliver/Projects/guiaTrader/GuiaTrader/obj/Release/net6.0/GuiaTrader.pdb
 /Users/cliver/Projects/guiaTrader/GuiaTrader/obj/Release/net6.0/GuiaTrader.genruntimeconfig.cache
 /Users/cliver/Projects/guiaTrader/GuiaTrader/obj/Release/net6.0/ref/GuiaTrader.dll
+/Users/cliver/Projects/guiaTrader/GuiaTrader/bin/Release/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/cliver/Projects/guiaTrader/GuiaTrader/bin/Release/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/cliver/Projects/guiaTrader/GuiaTrader/bin/Release/net6.0/Newtonsoft.Json.dll
+/Users/cliver/Projects/guiaTrader/GuiaTrader/bin/Release/net6.0/Newtonsoft.Json.Bson.dll
+/Users/cliver/Projects/guiaTrader/GuiaTrader/bin/Release/net6.0/System.Security.Permissions.dll

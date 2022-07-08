@@ -4,6 +4,8 @@ using GuiaTrader.Models;
 using System.Net;
 using System.Text.Json;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Filters;
+
 namespace GuiaTrader.Controllers;
 
 public static class SessionExtensions
@@ -21,6 +23,30 @@ public static class SessionExtensions
     }
 }
 
+public class CheckSessionIsAvailable : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext filterContext)
+    {
+        base.OnActionExecuting(filterContext);
+
+        if (filterContext.HttpContext == null || filterContext.HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance") == null)
+        {
+            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+            {
+                controller = "Home",
+                action = "Logout"
+            }));
+
+            if (filterContext.HttpContext != null)
+            {
+                Facade.Fachada fachada = new Facade.Fachada();
+                filterContext.HttpContext.Session.SetObjectAsJson("instance", fachada);
+            }
+        }
+    }
+}
+
+[CheckSessionIsAvailable]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -69,7 +95,7 @@ public class HomeController : Controller
 
 
     [HttpGet]
-    public ViewResult InicioGuiaTrader(Usuario user)
+    public IActionResult InicioGuiaTrader(Usuario user)
     {
         Facade.Fachada fachada;
         if (HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance") != null)
@@ -89,19 +115,18 @@ public class HomeController : Controller
             return View();
         }
         else
-            return View("Index");
+            return RedirectToAction("Index");
     }
 
     [HttpGet]
-    public PartialViewResult getResumoMes(DateTime dataReferencia)
+    public IActionResult getResumoMes(DateTime dataReferencia)
     {
         Facade.Fachada fachada;
         if (HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance") != null)
             fachada = HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance");
         else
         {
-            fachada = new Facade.Fachada();
-            HttpContext.Session.SetObjectAsJson("instance", fachada);
+            return RedirectToAction("Index");
         }
 
         ResultadoPartidaViewModel model = new ResultadoPartidaViewModel();
@@ -112,15 +137,14 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public PartialViewResult getPartidas(DateTime dataReferencia)
+    public IActionResult getPartidas(DateTime dataReferencia)
     {
         Facade.Fachada fachada;
         if (HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance") != null)
             fachada = HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance");
         else
         {
-            fachada = new Facade.Fachada();
-            HttpContext.Session.SetObjectAsJson("instance", fachada);
+            return RedirectToAction("Index");
         }
 
         PartidaModelView model = new PartidaModelView();
@@ -139,8 +163,7 @@ public class HomeController : Controller
             fachada = HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance");
         else
         {
-            fachada = new Facade.Fachada();
-            HttpContext.Session.SetObjectAsJson("instance", fachada);
+            return false;
         }
 
         return fachada.salvarResultado(idPartida, green, valor);
@@ -154,8 +177,7 @@ public class HomeController : Controller
             fachada = HttpContext.Session.GetObjectFromJson<Facade.Fachada>("instance");
         else
         {
-            fachada = new Facade.Fachada();
-            HttpContext.Session.SetObjectAsJson("instance", fachada);
+            return false;
         }
 
         return fachada.salvarEntrada(idPartida);
