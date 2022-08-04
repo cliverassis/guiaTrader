@@ -31,6 +31,9 @@ namespace GuiaTrader.Business
 
             foreach (Partida partida in model)
             {
+                if (partida.casa.mediaGolsMarcado < 1 || partida.visitante.mediaGolsMarcado < 1)
+                    continue;
+
                 Boolean percentOver25 = (partida.casa.percentOver25 >= 60 && partida.visitante.percentOver25 >= 60);
                 Boolean mediaGolsTotal = (partida.casa.mediaGolsMarcadoSofrido >= 3) && (partida.visitante.mediaGolsMarcadoSofrido >= 3);
                 Boolean golsCasa = ((partida.casa.mediaGolsMarcado + partida.visitante.mediaGolsSofrido) / 2) >= 1.5;
